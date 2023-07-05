@@ -14,6 +14,7 @@ const { jwt } = require('./controllers/jwt.controller')
 const { logger, middleware, errorHandler } = require('./controllers/err.handler')/*  */
 const { exceptionHandler } = require('./controllers/csrf.handler')/*  */
 const path = require('path')
+const hpp = require('hpp')
 const corsOptions = {
   // origin: "Aqui va la DNS",
   origin: [
@@ -22,6 +23,7 @@ const corsOptions = {
     'https://apibuetpf.teleperformance.co'
   ]
 }
+app.use(hpp())
 app.use(cors(corsOptions))
 app.use(
   helmet.frameguard({

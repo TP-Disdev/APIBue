@@ -20,6 +20,8 @@ const responsep = (tipo, req, res, resultado, _cookie) => {
   return new Promise((_resolve, _reject) => {
     if (tipo === 1) {
       res.cookie('XSRF-TOKEN', req.csrfToken(), {
+        httpOnly: true,
+        secure: req.secure,
         'max-Age': new Date(Date.now() + 90000000),
         path: '/'
       })

@@ -10,7 +10,6 @@ const requestIp = require('request-ip')
 const helmet = require('helmet')
 const router = express.Router()
 const routes = require('./routes/router')
-const { jwt } = require('./controllers/jwt.controller')
 const { logger, middleware, errorHandler } = require('./controllers/err.handler')/*  */
 const { exceptionHandler } = require('./controllers/csrf.handler')/*  */
 const path = require('path')
@@ -62,7 +61,6 @@ app.use(exceptionHandler)/*  */
 app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'))
 })
-app.use(jwt())
 app.use(errorHandler)
 
 app.use('/api', router)

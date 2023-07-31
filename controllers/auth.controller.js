@@ -1,6 +1,7 @@
 const sql = require('./sql.controller')
 const parametros = require('./params.controller').parametros
 const { generateToken, verifyToken } = require('./jwt.controller')
+const { Encrypt, Decrypt } = require('./crypt.controller')
 
 exports.loginAppUser = (req, res) => {
   sql
@@ -11,7 +12,7 @@ exports.loginAppUser = (req, res) => {
         const { pass } = Result[0]
         if (pass === 'OK') {
           const token = generateToken('user')
-          res.status(200).json({ token })
+          res.status(200).json({ token: Encrypt(token) })
         } else {
           res.status(401).json({ error: 'User not found' })
         }
@@ -29,7 +30,8 @@ exports.checkJwt = (req, res, next) => {
     const jtwByUser = req.headers.authorization
     if (jtwByUser) {
       const jwt = jtwByUser.split(' ').pop()
-      const isUser = verifyToken(jwt)
+      const decryptJWT = Decrypt(jwt).replaceAll('"', '')
+      const isUser = verifyToken(decryptJWT)
       if (!isUser) {
         res.status(401).json({
           error: 'Invalid jwt token'
@@ -44,6 +46,9 @@ exports.checkJwt = (req, res, next) => {
       })
     }
   } catch (error) {
+    res.status(401).json({
+      error: error.message
+    })
     console.log(error)
   }
 }

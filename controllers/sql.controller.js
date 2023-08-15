@@ -24,7 +24,6 @@ const injectjson = (rows) => {
 }
 
 exports.query = (storedProcedure, parametros, actualCountry = 'COL') => {
-  console.log(connectionObject[actualCountry] || properties.configtest)
   return new Promise((resolve, reject) => {
     const conn = new Connection(connectionObject[actualCountry] || properties.configtest)
     conn.on('connect', (err) => {

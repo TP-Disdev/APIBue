@@ -3,6 +3,13 @@ const properties = require('../properties/properties')
 const Connection = require('tedious').Connection
 const Request = require('tedious').Request
 
+const connectionObject = {
+  COL: properties.configtest,
+  PERU: properties.configPeru,
+  NIC: properties.configNic,
+  GUY: properties.configGuy
+}
+
 const injectjson = (rows) => {
   return new Promise((resolve) => {
     const jsonArray = rows.map((columns) => {
@@ -16,9 +23,10 @@ const injectjson = (rows) => {
   })
 }
 
-exports.query = (storedProcedure, parametros) => {
+exports.query = (storedProcedure, parametros, actualCountry = 'COL') => {
+  console.log(connectionObject[actualCountry] || properties.configtest)
   return new Promise((resolve, reject) => {
-    const conn = new Connection(properties.configtest)
+    const conn = new Connection(connectionObject[actualCountry] || properties.configtest)
     conn.on('connect', (err) => {
       if (err) {
         console.error('error - ', err)

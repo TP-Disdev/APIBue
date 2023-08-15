@@ -7,7 +7,6 @@ exports.loginAppUser = (req, res) => {
   sql
     .query('spHashAPIBUE', parametros(req.body, 'spHashAPIBUE'))
     .then((Result) => {
-      console.log(Result)
       if (Result) {
         const { pass } = Result[0]
         if (pass === 'OK') {

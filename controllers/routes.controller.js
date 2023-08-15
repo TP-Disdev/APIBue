@@ -2,7 +2,7 @@ const sql = require('./sql.controller')
 const parametros = require('./params.controller').parametros
 exports.CallSp = (spName, req, res) => {
   sql
-    .query(spName, parametros(req.body, spName))
+    .query(spName, parametros(req.body, spName), req.body.country)
     .then((Result) => {
       if (Result) {
         responsep(1, req, res, JSON.parse(Result[0].JSN))

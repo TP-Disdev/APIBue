@@ -1,12 +1,12 @@
 require('dotenv').config()
 module.exports = {
   configtest: {
-    server: process.env.IP_SQL,
+    server: process.env.IP_SQLPROD,
     authentication: {
       type: process.env.TYPE,
       options: {
         userName: process.env.SQL_USERNAME,
-        password: process.env.SQL_PASSWORD
+        password: process.env.SQL_PASSWORDPROD
       }
     },
     driver: process.env.DRIVER,
@@ -21,12 +21,12 @@ module.exports = {
     }
   },
   configPeru: {
-    server: process.env.IP_SQL,
+    server: process.env.IP_SQLPROD,
     authentication: {
       type: process.env.TYPE,
       options: {
         userName: process.env.SQL_USERNAME,
-        password: process.env.SQL_PASSWORD
+        password: process.env.SQL_PASSWORDPROD
       }
     },
     driver: process.env.DRIVER,
@@ -41,12 +41,12 @@ module.exports = {
     }
   },
   configNic: {
-    server: process.env.IP_SQL,
+    server: process.env.IP_SQLPROD,
     authentication: {
       type: process.env.TYPE,
       options: {
         userName: process.env.SQL_USERNAME,
-        password: process.env.SQL_PASSWORD
+        password: process.env.SQL_PASSWORDPROD
       }
     },
     driver: process.env.DRIVER,

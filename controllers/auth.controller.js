@@ -20,6 +20,7 @@ exports.loginAppUser = (req, res) => {
       }
     })
     .catch((err) => {
+      res.status(401).json({ error: 'Bad request' })
       console.log(err, 'sp')
     })
 }
